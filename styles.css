@@ -1,0 +1,33 @@
+body {
+  background-color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen,
+    ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial,
+    sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+.container {
+  background-color: #3274d6;
+  height: 5.8rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+nav .box-1 {
+  width: 5rem;
+  height: 5rem;
+  margin: 1rem;
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+h1 {
+  color: #3274d6;
+  text-align: center;
+}

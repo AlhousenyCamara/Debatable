@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/chat.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>DEBATABLE</h1>
+    </div>
+
+    <div class="chat-box" id="chat-area"></div>
+
+    <div class="chatting-area">
+      <textarea class="chatting-box" id="chatting-box"></textarea>
+      <button class="send-button" onclick="sendMessage()">Send</button>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+      integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var socket;
+      window.onload = function () {
+        socket = io.connect("http://localhost:3000");
+
+        socket.on("codeboard-message-broadcasted", function (message) {
+          var html =
+            '<div class="chat-box others-chat-box">' +
+            '<div class="chat others-chat"> ' +
+            message +
+            " </div>" +
+            '<div class="separator"></div>' +
+            "</div>";
+          document.getElementById("chat-area").innerHTML += html;
+        });
+      };
+      function sendMessage() {
+        var message = document.getElementById("chatting-box").value;
+        var html =
+          '<div class="chat-box my-chat-box">' +
+          '<div class="chat my-chat"> ' +
+          message +
+          " </div>" +
+          '<div class="separator"></div>' +
+          "</div>";
+
+        document.getElementById("chat-area").innerHTML += html;
+        document.getElementById("chatting-box").value = "";
+
+        socket.emit("codeboard-message", message);
+      }
+    </script>
+  </body>
+</html>
